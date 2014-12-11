@@ -1,9 +1,9 @@
 fcsh
 ====
 
-A simple Linux shell to show the use of `fork()`, `execvp()`, pipes and input/output redirection.
+A simple Linux shell written in C++ to show the use of `fork()`, `execvp()`, pipes and input/output redirection.
 
-Un sencillo shell de Linux que muestra cómo utilizar `fork()`, `execvp()`, tuberías y redirección de la entrada y salida.
+Un sencillo shell de Linux escrito en C++ que muestra cómo utilizar `fork()`, `execvp()`, tuberías y redirección de la entrada y salida.
 
 ![fcsh shell running](fcsh.png)
 
