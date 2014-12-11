@@ -5,6 +5,8 @@ A simple Linux shell to show the use of `fork()`, `execvp()`, pipes and input/ou
 
 Un sencillo shell de Linux que muestra cómo utilizar `fork()`, `execvp()`, tuberías y redirección de la entrada y salida.
 
+![fcsh shell running](fcsh.png)
+
 Compilación/Compilation
 =======================
 
