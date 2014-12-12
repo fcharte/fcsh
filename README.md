@@ -36,3 +36,11 @@ combinándolos si interesa, así como el metacarácter `|` para crear una
 interconexión entre dos procesos. No se pueden combinar `<` y/o `>` con `|`.
 
 Para salir de `fcsh` utiliza el comando `exit` o pulsa `Ctrl-C`
+
+
+Asynchronous version
+====================
+
+An extended version of fcsh, using threads and semaphores to run other processes asynchronously, can be found in the `async` folder.
+
+En la carpeta `async` se ofrece una versión ampliada de fcsh, en la que se utilizan hilos y semáforos para ejecutar otros procesos de manera asíncrona.
