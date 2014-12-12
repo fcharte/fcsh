@@ -7,7 +7,7 @@ Un sencillo shell de Linux escrito en C++ que muestra cómo utilizar `fork()`, `
 
 ![fcsh shell running](fcsh.png)
 
-Compilación/Compilation
+Compilation/Compilación
 =======================
 
 Open a Linux terminal - Abre una terminal de Linux
@@ -38,8 +38,8 @@ interconexión entre dos procesos. No se pueden combinar `<` y/o `>` con `|`.
 Para salir de `fcsh` utiliza el comando `exit` o pulsa `Ctrl-C`
 
 
-Asynchronous version
-====================
+Asynchronous version/Versión asíncrona
+======================================
 
 An extended version of fcsh, using threads and semaphores to run other processes asynchronously, can be found in the `async` folder.
 
