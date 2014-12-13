@@ -2,16 +2,18 @@
  *	@file	fcsh.cpp
  *	@date 	abril-mayo 2007
  *  @author Francisco Charte Ojeda
- *	@brief 	ImplementaciÛn de la clase FcSh
+ *	@brief 	Implementaci√≥n de la clase FcSh
  */
 #include <sstream>
 #include <sys/wait.h>
 #include <unistd.h>
 #include <fcntl.h>
+#include <string.h>
+#include <stdlib.h>
 
 #include "fcsh.hpp"
 
-/** @brief FunciÛn auxiliar para generar una matriz char* a partir de un vector STL */
+/** @brief Funci√≥n auxiliar para generar una matriz char* a partir de un vector STL */
 char** StlACpp(vector<string>& Parametros)
 {
     char** argv = new char*[Parametros.size()+1];
@@ -21,7 +23,7 @@ char** StlACpp(vector<string>& Parametros)
         argv[i] = new char[Parametros[i].size()+1];
         strncpy(argv[i], Parametros[i].c_str(), Parametros[i].size()+1);
     }
-    argv[i] = NULL; // el ˙ltimo puntero ha de ser NULL para que execvp funcione
+    argv[i] = NULL; // el √∫ltimo puntero ha de ser NULL para que execvp funcione
 
 	return argv;	
 }
@@ -29,32 +31,32 @@ char** StlACpp(vector<string>& Parametros)
 /*
  * Constructor
  * 
- * Inicializa el objeto aplicaciÛn 
+ * Inicializa el objeto aplicaci√≥n 
  */
 FcSh::FcSh() : _nComando(0), _nAsincronos(0), _Semaforo(new TSemaforo(1)), 
               _MensajesPendientes(new stack<string>()) 
 {
-    // Controla la pulsaciÛn de Control-C
+    // Controla la pulsaci√≥n de Control-C
 	signal(SIGINT, GestorControlC); 
 
-	// Muestro unas breves indicaciones sobre el funcionamiento del intÈrprete
+	// Muestro unas breves indicaciones sobre el funcionamiento del int√©rprete
 	system("clear");
 	cout << endl << "Bienvenido a fcsh (Francisco Charte Shell 1.0 8-D)" << endl << endl
-	     << "Introduce los comandos a ejecutar como lo harÌas habitualmente en Linux," << endl
-	     << "separando cada argumento y metacar·cter con espacios." << endl << endl 
+	     << "Introduce los comandos a ejecutar como lo har√≠as habitualmente en Linux," << endl
+	     << "separando cada argumento y metacar√°cter con espacios." << endl << endl 
 	     << "Puedes utilizar los metacaracteres < y > para redireccionar entrada y salida," << endl
-	     << "combin·ndolos si interesa, asÌ como el metacar·cter | para crear una" << endl  
-	     << "interconexiÛn entre dos procesos. No se pueden combinar < y/o > con |." << endl << endl
-	     << "Disponiendo el car·cter & al final de la lÌnea de comandos Èsta se ejecutar· " 
-	     << "en segundo plano, recibiÈndose una notificaciÛn a medida que terminen." << endl << endl
+	     << "combin√°ndolos si interesa, as√≠ como el metacar√°cter | para crear una" << endl  
+	     << "interconexi√≥n entre dos procesos. No se pueden combinar < y/o > con |." << endl << endl
+	     << "Disponiendo el car√°cter & al final de la l√≠nea de comandos √©sta se ejecutar√° " 
+	     << "en segundo plano, recibi√©ndose una notificaci√≥n a medida que terminen." << endl << endl
 	     << "Para salir de fcsh utiliza el comando 'exit'" << endl << endl;
 }
 
 /* 
  * Ejecutar
  * 
- * Este mÈtodo act˙a como el nudo central del shell, mostrando el indicador, 
- * solicitando la lÌnea de comandos, analiz·ndola y proces·ndola como corresponda.
+ * Este m√©todo act√∫a como el nudo central del shell, mostrando el indicador, 
+ * solicitando la l√≠nea de comandos, analiz√°ndola y proces√°ndola como corresponda.
  * 
  */
 int FcSh::Ejecutar()
@@ -75,7 +77,7 @@ int FcSh::Ejecutar()
 		_Semaforo->Signal();
 		
 		MostrarPrompt(); // Se muestra el indicador de entrada
-		Comando = LeerComando(); // Se recupera una lÌnea de comando
+		Comando = LeerComando(); // Se recupera una l√≠nea de comando
 		// Se analiza su contenido
 		if(AnalizaLineaComandos(Comando, Asincrono, Parametros, ArchivoIn, ArchivoOut, Pipe))
 		    // y se procesa el comando 
@@ -88,7 +90,7 @@ int FcSh::Ejecutar()
 /*
  * MostrarPrompt
  * 
- * MÈtodo encargado de mostrar el indicador del shell.
+ * M√©todo encargado de mostrar el indicador del shell.
  * 
  */
 void FcSh::MostrarPrompt()
@@ -99,7 +101,7 @@ void FcSh::MostrarPrompt()
 /*
  * LeerComando
  * 
- * Este mÈtodo recupera de la entrada est·ndar la lÌnea de comandos a ejecutar, que
+ * Este m√©todo recupera de la entrada est√°ndar la l√≠nea de comandos a ejecutar, que
  * devuelve como resultado en un string.
  * 
  */
@@ -114,9 +116,9 @@ string FcSh::LeerComando()
 /*
  * AnalizaLineaComandos
  * 
- * Este mÈtodo toma como entrada la lÌnea de comandos completa y un vector de cadenas en
- * el que se devolver· la lista de par·metros. El valor de retorno, de tipo bool, indica
- * si se ha introducido algo o la lÌnea de comandos estaba vacÌa.
+ * Este m√©todo toma como entrada la l√≠nea de comandos completa y un vector de cadenas en
+ * el que se devolver√° la lista de par√°metros. El valor de retorno, de tipo bool, indica
+ * si se ha introducido algo o la l√≠nea de comandos estaba vac√≠a.
  * 
  */
 bool FcSh::AnalizaLineaComandos(string& Comando, bool& Asincrono, vector<string>& Parametros, string& ArchivoIn, string& ArchivoOut, vector<string>& Pipe)
@@ -127,9 +129,9 @@ bool FcSh::AnalizaLineaComandos(string& Comando, bool& Asincrono, vector<string>
 		
 	Asincrono = false;
 	while(!Asincrono && Entrada >> Elemento) // Vamos obteniendo las palabras de la cadena
-		// Comprobamos la apariciÛn de <, > y |
+		// Comprobamos la aparici√≥n de <, > y |
 		switch(Elemento[0]) {
-			case '<': // Tras el car·cter < estar· el nombre de archivo
+			case '<': // Tras el car√°cter < estar√° el nombre de archivo
 			    Entrada >> ArchivoIn;
 				break;			    
 			case '>':
@@ -154,27 +156,27 @@ bool FcSh::AnalizaLineaComandos(string& Comando, bool& Asincrono, vector<string>
 /* 
  * ProcesaComando
  * 
- * FunciÛn encargada de analizar el comando y procesarlo como corresponda
+ * Funci√≥n encargada de analizar el comando y procesarlo como corresponda
  * 
  */
 bool FcSh::ProcesaComando(string Comando, bool Asincrono, vector<string>& Parametros, string ArchivoIn, string ArchivoOut, vector<string>& Pipe)
 {
-	// Primero procesar los comandos internos del intÈrprete
+	// Primero procesar los comandos internos del int√©rprete
 	if(Comando == "exit") return true;
 	
-	// No es un comando interno, asÌ que creo un nuevo proceso o varios, seg˙n se precise
+	// No es un comando interno, as√≠ que creo un nuevo proceso o varios, seg√∫n se precise
 	
-    // Compruebo si hay una interconexiÛn con otro programa
+    // Compruebo si hay una interconexi√≥n con otro programa
 	if(Pipe.size()) {
 		int fds[2];
-		pipe(fds); // Creo la tuberÌa sin nombre para conectar dos procesos
+		pipe(fds); // Creo la tuber√≠a sin nombre para conectar dos procesos
 		
 		int f1 = fork();
 		if(!f1) { // Primer hijo
-			close(fds[0]); // Cierro el canal de lectura en la interconexiÛn
-			dup2(fds[1], STDOUT_FILENO); // y desvÌo la salida est·ndar a la escritura en la tuberÌa
+			close(fds[0]); // Cierro el canal de lectura en la interconexi√≥n
+			dup2(fds[1], STDOUT_FILENO); // y desv√≠o la salida est√°ndar a la escritura en la tuber√≠a
 			
-			char** argv = StlACpp(Parametros); // Par·metros correspondientes a este programa
+			char** argv = StlACpp(Parametros); // Par√°metros correspondientes a este programa
 	        // sustituyo el proceso actual por el del comando indicado
 	 	    if(execvp(Comando.c_str(), argv) == -1) {
 	 	    	// teniendo en cuenta un posible fallo
@@ -185,10 +187,10 @@ bool FcSh::ProcesaComando(string Comando, bool Asincrono, vector<string>& Parame
 		
 		int f2 = fork();
 		if(!f2) { // segundo hijo
-			close(fds[1]); // Cierro el canal de escritura en la interconexiÛn
-			dup2(fds[0], STDIN_FILENO); // y desvÌo la entrada est·ndar a la lectura de la tuberÌa
+			close(fds[1]); // Cierro el canal de escritura en la interconexi√≥n
+			dup2(fds[0], STDIN_FILENO); // y desv√≠o la entrada est√°ndar a la lectura de la tuber√≠a
 			
-			char** argv = StlACpp(Pipe); // Par·metros correspondientes a este programa
+			char** argv = StlACpp(Pipe); // Par√°metros correspondientes a este programa
 	        // sustituyo el proceso actual por el del comando indicado
 	 	    if(execvp(Pipe[0].c_str(), argv) == -1) {
 	 	    	// teniendo en cuenta un posible fallo
@@ -197,11 +199,11 @@ bool FcSh::ProcesaComando(string Comando, bool Asincrono, vector<string>& Parame
 	 	    }
 		}
 		
-		// El padre cierre la lectura y escritura en la tuberÌa y espera si es necesario
+		// El padre cierre la lectura y escritura en la tuber√≠a y espera si es necesario
 		close(fds[0]);
 		close(fds[1]);
 		
-		if(Asincrono) { // Si la ejecuciÛn es asÌncrona
+		if(Asincrono) { // Si la ejecuci√≥n es as√≠ncrona
 		   HCP h1(new TParHCP(f1, Comando, _Semaforo, _MensajesPendientes));  // utilizar un hilo para controlar cada proceso
 		   h1.Ejecutar();
 		   HCP h2(new TParHCP(f2, Pipe[0], _Semaforo, _MensajesPendientes));
@@ -215,11 +217,11 @@ bool FcSh::ProcesaComando(string Comando, bool Asincrono, vector<string>& Parame
 		return false;
 	}
 	
-	// No hay interconexiÛn, solamente se ejecuta un programa y se tienen en cuenta redireccionamientos
+	// No hay interconexi√≥n, solamente se ejecuta un programa y se tienen en cuenta redireccionamientos
 	int f = fork();
-	if(!f) { // Si Èste es el proceso hijo
+	if(!f) { // Si √©ste es el proceso hijo
 		
-		// Obtengo en una matriz de punteros a char los par·metros
+		// Obtengo en una matriz de punteros a char los par√°metros
         char** argv = StlACpp(Parametros);
         
 		// Compruebo si hay redireccionamiento de entrada
@@ -248,22 +250,22 @@ bool FcSh::ProcesaComando(string Comando, bool Asincrono, vector<string>& Parame
  	    	cout << "Fallo al intentar ejecutar " << Comando << endl;
  	    	exit(-1);
  	    }
-	} else { // Si Èste es el proceso padre
-		if(Asincrono) { // Si la ejecuciÛn es asÌncrona
+	} else { // Si √©ste es el proceso padre
+		if(Asincrono) { // Si la ejecuci√≥n es as√≠ncrona
 		   HCP h(new TParHCP(f, Comando, _Semaforo, _MensajesPendientes));  // utilizar un hilo para controlar el proceso
 		   h.Ejecutar();
 		   _nAsincronos++;
 		} else
-		   wait(NULL); // esperar a que termine el hijo si no se ha solicitado ejecuciÛn asÌncrona
+		   wait(NULL); // esperar a que termine el hijo si no se ha solicitado ejecuci√≥n as√≠ncrona
 	}
 		
-	return false; // No se quiere salir del intÈrprete
+	return false; // No se quiere salir del int√©rprete
 }
 
-/* ------------------------- MÈtodos de la clase HCP -------------------------- */
+/* ------------------------- M√©todos de la clase HCP -------------------------- */
 void HCP::CodigoHilo()
 {
-	TParHCP* p = (TParHCP *)_parametros; // Convierto los par·metros a estructura TParHCP
+	TParHCP* p = (TParHCP *)_parametros; // Convierto los par√°metros a estructura TParHCP
 	int CodSalida;
 	
 	// Esperar hasta que termine el pid del proceso en segundo plano
@@ -272,7 +274,7 @@ void HCP::CodigoHilo()
 	stringstream Mensaje;
 	// Compongo el mensaje con los datos de salida
     Mensaje << "Proceso " << p->Comando << " (pid:" << p->Pid 
-            << ") finalizado con cÛdigo de salida " << CodSalida;
+            << ") finalizado con c√≥digo de salida " << CodSalida;
             
     // y lo introduzco en la pila de mensajes pendientes
     p->Semaforo->Wait();
