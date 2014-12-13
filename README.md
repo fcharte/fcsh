@@ -43,4 +43,8 @@ Asynchronous version/Versión asíncrona
 
 An extended version of fcsh, using threads and semaphores to run other processes asynchronously, can be found in the `async` folder.
 
+Enter `g++ main.cpp fcsh.cpp -o fcsh -lpthread` to compile the program 
+
 En la carpeta `async` se ofrece una versión ampliada de fcsh, en la que se utilizan hilos y semáforos para ejecutar otros procesos de manera asíncrona.
+
+Escribe `g++ main.cpp fcsh.cpp -o fcsh -lpthread` para compilar el programa
