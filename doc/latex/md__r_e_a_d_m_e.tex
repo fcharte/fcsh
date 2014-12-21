@@ -1,0 +1,37 @@
+A simple Linux shell written in C++ to show the use of {\ttfamily fork()}, {\ttfamily execvp()}, pipes and input/output redirection.
+
+Un sencillo shell de Linux escrito en C++ que muestra cómo utilizar {\ttfamily fork()}, {\ttfamily execvp()}, tuberías y redirección de la entrada y salida.
+
+
+
+\section*{Compilation/\-Compilación }
+
+Open a Linux terminal -\/ Abre una terminal de Linux
+
+Enter {\ttfamily g++ main.\-cpp fcsh.\-cpp -\/o fcsh} to compile the program -\/ Escribe {\ttfamily g++ main.\-cpp fcsh.\-cpp -\/o fcsh} para compilar el programa
+
+Enter {\ttfamily ./fcsh} to run the program -\/ Escribe {\ttfamily ./fcsh} para ejecutar el programa
+
+\section*{How to use the program/\-Cómo utilizar el programa }
+
+Enter the commands to run as you usually do in Linux, using blank spaces to separate arguments and meta-\/characters-\/
+
+You can use the {\ttfamily $<$} and {\ttfamily $>$} meta-\/characters to redirect the input and output, even combining them if you want. The {\ttfamily $\vert$} meta-\/character can be used to create an interconnection pipe between two processes. Mixing {\ttfamily $<$} and/or {\ttfamily $>$} with {\ttfamily $\vert$} is not allowed.
+
+To exit {\ttfamily fcsh} enter the {\ttfamily exit}command or press {\ttfamily Ctrl-\/\-C}.
+
+Introduce los comandos a ejecutar como lo harías habitualmente en Linux, separando cada argumento y metacarácter con espacios.
+
+Puedes utilizar los metacaracteres {\ttfamily $<$} y {\ttfamily $>$} para redireccionar entrada y salida combinándolos si interesa, así como el metacarácter {\ttfamily $\vert$} para crear una interconexión entre dos procesos. No se pueden combinar {\ttfamily $<$} y/o {\ttfamily $>$} con {\ttfamily $\vert$}.
+
+Para salir de {\ttfamily fcsh} utiliza el comando {\ttfamily exit} o pulsa {\ttfamily Ctrl-\/\-C}
+
+\section*{Asynchronous version/\-Versión asíncrona }
+
+An extended version of fcsh, using threads and semaphores to run other processes asynchronously, can be found in the {\ttfamily async} folder.
+
+Enter {\ttfamily g++ main.\-cpp fcsh.\-cpp -\/o fcsh -\/lpthread} to compile the program
+
+En la carpeta {\ttfamily async} se ofrece una versión ampliada de fcsh, en la que se utilizan hilos y semáforos para ejecutar otros procesos de manera asíncrona.
+
+Escribe {\ttfamily g++ main.\-cpp fcsh.\-cpp -\/o fcsh -\/lpthread} para compilar el programa 

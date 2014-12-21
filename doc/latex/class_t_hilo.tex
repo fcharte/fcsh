@@ -1,0 +1,123 @@
+\hypertarget{class_t_hilo}{\section{T\-Hilo Class Reference}
+\label{class_t_hilo}\index{T\-Hilo@{T\-Hilo}}
+}
+
+
+Clase que encapsula la creación de un hilo y ejecución de un método.  
+
+
+
+
+{\ttfamily \#include $<$thread.\-hpp$>$}
+
+Inheritance diagram for T\-Hilo\-:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_t_hilo}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_t_hilo_ac74c1a9365ad9ae9357f9878dcf05bf5}{T\-Hilo} (bool detached=false, void $\ast$parametros=N\-U\-L\-L)
+\item 
+virtual \hyperlink{class_t_hilo_a459c1bb6d98dad25e48114bc17ce936c}{$\sim$\-T\-Hilo} ()
+\item 
+virtual void \hyperlink{class_t_hilo_a6ae21b5e74192311a00b70278b527413}{Ejecutar} ()
+\item 
+void \hyperlink{class_t_hilo_a35d3d8e8c5bf8925abab5227d58d0246}{Espera} ()
+\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual void \hyperlink{class_t_hilo_affad1e63d158bd7766f676d2e1457a71}{Codigo\-Hilo} ()=0
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+void $\ast$ \hyperlink{class_t_hilo_ad96a4392461d9b737021c13b142c947a}{\-\_\-parametros}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Clase que encapsula la creación de un hilo y ejecución de un método. 
+
+Definition at line 13 of file thread.\-hpp.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_t_hilo_ac74c1a9365ad9ae9357f9878dcf05bf5}{\index{T\-Hilo@{T\-Hilo}!T\-Hilo@{T\-Hilo}}
+\index{T\-Hilo@{T\-Hilo}!THilo@{T\-Hilo}}
+\subsubsection[{T\-Hilo}]{\setlength{\rightskip}{0pt plus 5cm}T\-Hilo\-::\-T\-Hilo (
+\begin{DoxyParamCaption}
+\item[{bool}]{detached = {\ttfamily false}, }
+\item[{void $\ast$}]{parametros = {\ttfamily NULL}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_t_hilo_ac74c1a9365ad9ae9357f9878dcf05bf5}
+El constructor recibe los parámetros que quieran asociarse al hilo 
+
+Definition at line 25 of file thread.\-hpp.
+
+\hypertarget{class_t_hilo_a459c1bb6d98dad25e48114bc17ce936c}{\index{T\-Hilo@{T\-Hilo}!$\sim$\-T\-Hilo@{$\sim$\-T\-Hilo}}
+\index{$\sim$\-T\-Hilo@{$\sim$\-T\-Hilo}!THilo@{T\-Hilo}}
+\subsubsection[{$\sim$\-T\-Hilo}]{\setlength{\rightskip}{0pt plus 5cm}virtual T\-Hilo\-::$\sim$\-T\-Hilo (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}}\label{class_t_hilo_a459c1bb6d98dad25e48114bc17ce936c}
+Destructor virtual 
+
+Definition at line 27 of file thread.\-hpp.
+
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_t_hilo_affad1e63d158bd7766f676d2e1457a71}{\index{T\-Hilo@{T\-Hilo}!Codigo\-Hilo@{Codigo\-Hilo}}
+\index{Codigo\-Hilo@{Codigo\-Hilo}!THilo@{T\-Hilo}}
+\subsubsection[{Codigo\-Hilo}]{\setlength{\rightskip}{0pt plus 5cm}virtual void T\-Hilo\-::\-Codigo\-Hilo (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [pure virtual]}}}\label{class_t_hilo_affad1e63d158bd7766f676d2e1457a71}
+Método virtual puro (abstracto) que contendrá el código útil del hilo 
+
+Implemented in \hyperlink{class_h_c_p_af553d8f8354a9bb6633974f7404a6aac}{H\-C\-P}.
+
+\hypertarget{class_t_hilo_a6ae21b5e74192311a00b70278b527413}{\index{T\-Hilo@{T\-Hilo}!Ejecutar@{Ejecutar}}
+\index{Ejecutar@{Ejecutar}!THilo@{T\-Hilo}}
+\subsubsection[{Ejecutar}]{\setlength{\rightskip}{0pt plus 5cm}virtual void T\-Hilo\-::\-Ejecutar (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}}\label{class_t_hilo_a6ae21b5e74192311a00b70278b527413}
+Método que pondrá en marcha la ejecución del hilo 
+
+Definition at line 29 of file thread.\-hpp.
+
+\hypertarget{class_t_hilo_a35d3d8e8c5bf8925abab5227d58d0246}{\index{T\-Hilo@{T\-Hilo}!Espera@{Espera}}
+\index{Espera@{Espera}!THilo@{T\-Hilo}}
+\subsubsection[{Espera}]{\setlength{\rightskip}{0pt plus 5cm}void T\-Hilo\-::\-Espera (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_t_hilo_a35d3d8e8c5bf8925abab5227d58d0246}
+Método para esperar a la ejecución del hilo 
+
+Definition at line 33 of file thread.\-hpp.
+
+
+
+\subsection{Member Data Documentation}
+\hypertarget{class_t_hilo_ad96a4392461d9b737021c13b142c947a}{\index{T\-Hilo@{T\-Hilo}!\-\_\-parametros@{\-\_\-parametros}}
+\index{\-\_\-parametros@{\-\_\-parametros}!THilo@{T\-Hilo}}
+\subsubsection[{\-\_\-parametros}]{\setlength{\rightskip}{0pt plus 5cm}void$\ast$ T\-Hilo\-::\-\_\-parametros\hspace{0.3cm}{\ttfamily [protected]}}}\label{class_t_hilo_ad96a4392461d9b737021c13b142c947a}
+Parámetros que se le quieran enviar al hilo 
+
+Definition at line 39 of file thread.\-hpp.
+
+
+
+The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+async/\hyperlink{thread_8hpp}{thread.\-hpp}\end{DoxyCompactItemize}
